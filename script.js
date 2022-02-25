@@ -1,5 +1,24 @@
-function usersPaly(){
-    let play = prompt("Rock, Paper, or Scissors");
+let playerScore = 0;
+let computerScore = 0;
+let games = 0;
+const moves = document.querySelectorAll('.play');
+for (var i = 0; i < moves.length; i++) {
+    moves[i].addEventListener('click', function(e){
+        let selection = document.querySelector(`#${e.target.id}`);
+        let elements = document.querySelectorAll(".active");
+        for (var i = 0; i < elements.length; i++) {
+            elements[i].classList.remove("active");
+        }
+        selection.classList.add('active');
+    });
+}
+
+const play = document.querySelector("#playRound");
+play.addEventListener('click', playGame)
+
+
+function usersPaly(choice){
+    let play = choice;
     return play;
 }
 
@@ -32,14 +51,17 @@ function playRound(playerSelection, computerSelection){
 
 }
 function playGame(){
-  let playerScore = 0;
-  let computerScore = 0;
-  let overall;
-  for (let i = 0; i < 5; i++){
-    const playerSelection = String.prototype.toUpperCase.call(usersPaly());
+  let selection = document.querySelector('.active').id;
+  console.log(selection)
+  games++;
+
+    const playerSelection = String.prototype.toUpperCase.call(usersPaly(selection));
     const computerSelection = String.prototype.toUpperCase.call(computersPlay());
-    let results = playRound(playerSelection, computerSelection)
-    alert(results)
+    let results = playRound(playerSelection, computerSelection);
+    let overall = document.querySelector('#results');
+    overall.innerHTML = results;
+
+
 
     switch(results){
         case "Player Wins":
@@ -51,18 +73,31 @@ function playGame(){
         default:
             break;
     }
-    console.log(`Player Score: ${playerScore}`, `Computer Score: ${computerScore}`)
-  }
 
-  if (computerScore > playerScore){
-    overall = 'Overall Winner: Computer!'
-  }else if (computerScore < playerScore){
-    overall = 'Overall Winner: Player!'
-  }else{
-    overall = 'DRAW!'
-  }
-  return overall;
+    
 
+    
+    document.querySelector('#playerScore').innerHTML =`Player Score: ${playerScore}`
+    document.querySelector('#computerScore').innerHTML =`Computer Score: ${computerScore}`
+
+    if(games == 5){
+        if (computerScore > playerScore){
+            overall.innerHTML = 'Overall Winner: Computer!';
+            games = 0;
+            computerScore = 0;
+            playerScore = 0;
+            
+        }else if (computerScore < playerScore){
+            overall.innerHTML = 'Overall Winner: Player!';
+            games = 0;
+            computerScore = 0;
+            playerScore = 0;
+        }else{
+            overall.innerHTML = 'Overall Winner: DRAW!';
+            games = 0;
+            computerScore = 0;
+            playerScore = 0;
+        }
+    }
 }
 
-alert(playGame())

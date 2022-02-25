@@ -1,0 +1,26 @@
+body{
+    background-image: url(https://wallpapercave.com/wp/wp8121931.jpg);
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+}
+
+.active{
+    border: 3px solid green;
+    border-radius: 5px;
+}
+
+div{
+    margin: 20px auto;
+    width: 500px;
+    display: flex;
+    justify-content: space-evenly;
+}
+
+button {
+    width: 100px;
+    height: 50px;
+    font-size: 16px;
+    box-sizing: border-box;
+}
